@@ -1,17 +1,16 @@
-const {StatusCodes} = require('http-status-codes');
 const NotImplemented = require('../errors/notImplemented.error');
-const BadRequest = require('../errors/badrequest.error');
-const ForbiddenError = require('../errors/forbidden.error');
-const PaymentRequiredError = require('../errors/payment.required.error');
+const {ProblemService} = require('../services')
+const {ProblemRepository} = require('../repositories')
+
+const problemService = new ProblemService(new ProblemRepository());
 
 function pingProblemController(req,res){
     return res.json({message:"Problem Controller is up"}); 
 }
 
-function addProblem(req,res,next){
+async function addProblem(req,res,next){
     try {
-        // nothing implemented
-        throw new PaymentRequiredError();
+        const newProblem = await problemService.createProblem(req.body)
     } catch(error) {
         next(error);
     }
