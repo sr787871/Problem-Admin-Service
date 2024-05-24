@@ -5,6 +5,7 @@ class ProblemRepository{
     // INSIDE this we write the actual querry.
     async createProblem(problemData){
         try {
+            throw err("something went wrong");
             const problem = await Problem.create({
                     title:problemData.title,
                     description:problemData.description,
@@ -14,6 +15,17 @@ class ProblemRepository{
         } catch (error) {
             console.log(error)
             throw error
+        }
+    }
+
+    async getAllProblems(){
+        try {
+            // throw "error";
+            const problems = await Problem.find({});
+            return problems; 
+        } catch (error) {
+            console.log(error);
+            throw error;
         }
     }
 }
