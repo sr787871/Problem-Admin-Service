@@ -1,3 +1,4 @@
+const NotFound = require('../errors/not.found.error');
 const {Problem} = require('../models')
 
 class ProblemRepository{
@@ -5,7 +6,6 @@ class ProblemRepository{
     // INSIDE this we write the actual querry.
     async createProblem(problemData){
         try {
-            throw err("something went wrong");
             const problem = await Problem.create({
                     title:problemData.title,
                     description:problemData.description,
@@ -13,18 +13,27 @@ class ProblemRepository{
             });
             return problem
         } catch (error) {
-            console.log(error)
             throw error
         }
     }
 
     async getAllProblems(){
         try {
-            // throw "error";
             const problems = await Problem.find({});
             return problems; 
         } catch (error) {
-            console.log(error);
+            throw error;
+        }
+    }
+
+    async getProblem(id){
+        try {
+            const problem = await Problem.findById(id);
+            if(!problem){
+                throw new NotFound("Problem",id)
+            }
+            return problem;
+        } catch (error) {
             throw error;
         }
     }
