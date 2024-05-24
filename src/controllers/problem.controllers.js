@@ -63,7 +63,7 @@ function deleteProblem(req,res,next){
     }
 }
 
-function updateProblem(req,res){
+function updateProblem(req,res,next){
     try {
         // nothing implemented
         throw new NotImplemented('Add Problem');
