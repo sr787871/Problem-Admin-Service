@@ -2,11 +2,13 @@ const NotImplemented = require('../errors/notImplemented.error');
 const {ProblemService} = require('../services')
 const {ProblemRepository} = require('../repositories')
 const {StatusCodes} = require('http-status-codes')
+// const {logger} = require('../config/logger.config.js')
 
 const problemService = new ProblemService(new ProblemRepository());
 
 function pingProblemController(req,res){
-    return res.json({message:"Problem Controller is up"}); 
+    // logger.error("ping error logs for ping controller")
+    return res.status(200).json({message:"Problem Controller is up"}); 
 }
 
 async function addProblem(req,res,next){
@@ -48,7 +50,7 @@ async function getProblems(req,res,next){
             message : "Successfully fetched all the problems",
             error : {},
             data : response,
-        })
+        });
     } catch(error) {
         next(error);
     }

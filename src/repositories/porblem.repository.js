@@ -1,4 +1,4 @@
-const logger = require('../config/logger.config');
+// const logger = require('../config/logger.config');
 const NotFound = require('../errors/not.found.error');
 const {Problem} = require('../models')
 
@@ -43,7 +43,7 @@ class ProblemRepository{
         try {
         const problem = await Problem.findByIdAndDelete(id);
         if(!problem){
-            logger.error(`Problem Repository : Problem with ${id} not found in the db`)
+            // logger.error(`Problem Repository : Problem with ${id} not found in the db`)
             throw new NotFound("problem",id)
         }
         return problem;        

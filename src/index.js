@@ -18,7 +18,7 @@ app.use('/api',apiRouter);
 
 
 app.get('/ping',(req,res)=>{
-    return res.json({message : 'Problem service is alive'})
+    return res.status(200).json({message : 'Problem service is alive'})
 })
 
 //last middleware if any error comes
